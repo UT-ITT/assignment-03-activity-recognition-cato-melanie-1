@@ -23,7 +23,7 @@ def callback():
 
     current_time = time()
 
-    row = {'id': len(data), 'timestamp': current_time, 
+    row = {'timestamp': current_time, 
            'acc_x': acc_x, 'acc_y': acc_y, 'acc_z': acc_z,
            'gyro_x': gyro_x, 'gyro_y': gyro_y, 'gyro_z': gyro_z}
     
