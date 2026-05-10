@@ -1,5 +1,6 @@
 from DIPPID import SensorUDP
 from time import sleep, time
+from resample import resample
 import pandas as pd
 
 PORT = 5700
@@ -44,12 +45,15 @@ for i in range(5):
 
     while (time() - start_time) < 10:
         callback()
-        sleep(0.01)
+        sleep(0.001)
 
 
     filename = f'{name}-{activity}-{i+1}.csv'
     df = pd.DataFrame(data)
     df.to_csv(filename, index=False)
+
+    #resample to 100 Hz
+    resample(name, activity, i+1)
 
 
 print(f'Recording {activity} done')
