@@ -3,11 +3,13 @@
 import activity_recognizer as activity
 import pyglet
 
-#TODO
+#DONE
 #read training data from csv files
 #pre-process training data
 #split into train and test dataset
 #train ML classifier
+
+#TODO
 #evaluate accuracy using test dataset
 
 #start pyglet fitness app
