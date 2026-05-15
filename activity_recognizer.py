@@ -4,14 +4,15 @@ import numpy as np
 from sklearn import svm
 from sklearn.preprocessing import scale, StandardScaler
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, classification_report
 import os
 import glob
 
-#Load dataset
+#load dataset
 def load_data(dataset_path):
     recordings = []
 
-    activities = {"jumpingjacks", "running", "rowing", "lifitng"}
+    activities = ["jumpingjacks", "running", "rowing", "lifting"]
     
     for activity in activities:
         activity_path = os.path.join(dataset_path, activity)
@@ -87,6 +88,7 @@ for window in all_windows:
     feature = extract_features(window)
     all_features.append(feature)
 
+
 #ML dataset
 features_df = pd.DataFrame(all_features)
 
@@ -98,8 +100,19 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 #scale
 scaler = StandardScaler()
-X_scale = scaler.fit_transform(X_train)
-X_testing = scaler.transform(X_test)
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
 
-print(X_scale.shape)
-print(X_testing.shape)
+print(X_train_scaled.shape)
+print(X_test_scaled.shape)
+
+#classification using SVM
+classifier = svm.SVC(kernel='rbf')
+classifier.fit(X_train_scaled, y_train)
+
+zz = classifier.predict(X_test_scaled)
+
+
+print(accuracy_score(y_test, zz))
+print(classification_report(y_test, zz))
+
