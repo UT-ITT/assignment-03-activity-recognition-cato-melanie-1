@@ -11,3 +11,17 @@ How it works:
 5. Recording will last 10 seconds
 6. Press Button 1 to start recording again - 5 recodings are possible
 7. Each recording is resampled to 100Hz and saved as a CVS file
+
+
+## training data 
+- located in data
+- one folder for each activity ("jumpingjacks", "running", "rowing", "lifting")
+- if you have multiple folders with log data, get data in there via:
+    - cd data
+    - cp path/to/logs/folder/*/*row*.csv ./rowing/
+    - cp path/to/logs/folder/*/*jump*.csv ./jumpingjacks/
+    - cp path/to/logs/folder/*/*lift*.csv ./lifting/
+    - cp path/to/logs/folder/*/*run*.csv ./running/
+
+    
+
