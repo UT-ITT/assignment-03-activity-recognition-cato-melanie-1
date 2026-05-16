@@ -8,15 +8,17 @@ import pyglet
 #pre-process training data
 #split into train and test dataset
 #train ML classifier
-
-#TODO
 #evaluate accuracy using test dataset
 
-#start pyglet fitness app
-#(takes data and displays to the user which activity is being done and if it
-# is done correctly?)
+#TODO
+#try more preprocessing to get higher accuracy
+
+#design pyglet fitness app
+#take sensor data from dippid and predict which activity is being done
+#also predict if it is done correctly?
 
 #document how to use the app in README
+#document how our training data is structured in README
 
 #note:
 #put all functions that are not related to visualization in activity_recognizer
