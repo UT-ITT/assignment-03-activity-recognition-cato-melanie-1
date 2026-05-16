@@ -2,7 +2,7 @@
 import pandas as pd
 import numpy as np
 from sklearn import svm
-from sklearn.preprocessing import scale, StandardScaler
+from sklearn.preprocessing import scale, StandardScaler, MinMaxScaler
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
 import os
@@ -28,7 +28,7 @@ def load_data(dataset_path):
     return recordings
 
 
-recordings = load_data("dataset")
+recordings = load_data("data")
 
 
 #divide into 2s windows
@@ -49,7 +49,7 @@ for recording in recordings:
     all_windows.extend(windows)
 
 
-#mean and standard deviation for each sensor value
+#mean and standard deviation per window for each sensor value
 def extract_features(window):
     features = {}
 
@@ -99,20 +99,20 @@ y = features_df["activity"]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 #scale
-scaler = StandardScaler()
+scaler = MinMaxScaler() #StandardScaler
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
-print(X_train_scaled.shape)
-print(X_test_scaled.shape)
+#print(X_train_scaled.shape)
+#print(X_test_scaled.shape)
 
 #classification using SVM
-classifier = svm.SVC(kernel='rbf')
+classifier = svm.SVC(kernel='poly') #rbf
 classifier.fit(X_train_scaled, y_train)
 
 zz = classifier.predict(X_test_scaled)
 
 
-print(accuracy_score(y_test, zz))
+print(f"accuracy: {accuracy_score(y_test, zz)}")
 print(classification_report(y_test, zz))
 
