@@ -2,7 +2,7 @@
 import pandas as pd
 import numpy as np
 from sklearn import svm
-from sklearn.preprocessing import scale, StandardScaler, MinMaxScaler
+from sklearn.preprocessing import scale, StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
 import os
@@ -28,14 +28,14 @@ def load_data(dataset_path):
     return recordings
 
 
-recordings = load_data("data")
+recordings = load_data("dataset")
 
 
 #divide into 2s windows
 def create_windows(recording):
     windows = []
 
-    for start in range(0, len(recording) - 200, 200):
+    for start in range(0, len(recording) - 200, 100):
         window = recording.iloc[start:start + 200]
         windows.append(window)
     
@@ -49,33 +49,46 @@ for recording in recordings:
     all_windows.extend(windows)
 
 
-#mean and standard deviation per window for each sensor value
+#mean and standard deviation for each sensor value
 def extract_features(window):
     features = {}
 
     #Acc x
     features["mean_acc_x"] = window["acc_x"].mean()
     features["std_acc_x"] = window["acc_x"].std()
+    features["min_acc_x"] = window["acc_x"].min()
+    features["max_acc_x"] = window["acc_x"].max()
 
     #Acc y
     features["mean_acc_y"] = window["acc_y"].mean()
     features["std_acc_y"] = window["acc_y"].std()
+    features["min_acc_y"] = window["acc_y"].min()
+    features["max_acc_y"] = window["acc_y"].max()
 
     #Acc z
     features["mean_acc_z"] = window["acc_z"].mean()
     features["std_acc_z"] = window["acc_z"].std()
+    features["min_acc_z"] = window["acc_z"].min()
+    features["max_acc_z"] = window["acc_z"].max()
 
     #Gyro x
     features["mean_gyro_x"] = window["gyro_x"].mean()
     features["std_gyro_x"] = window["gyro_x"].std()
+    features["min_gyro_x"] = window["gyro_x"].min()
+    features["max_gyro_x"] = window["gyro_x"].max()
 
     #Gyro y
     features["mean_gyro_y"] = window["gyro_y"].mean()
     features["std_gyro_y"] = window["gyro_y"].std()
+    features["min_gyro_y"] = window["gyro_y"].min()
+    features["max_gyro_y"] = window["gyro_y"].max()
 
     #Gyro z
     features["mean_gyro_z"] = window["gyro_z"].mean()
     features["std_gyro_z"] = window["gyro_z"].std()
+    features["min_gyro_z"] = window["gyro_z"].min()
+    features["max_gyro_z"] = window["gyro_z"].max()
+
 
     features["activity"] = window["activity"].iloc[0]
 
@@ -99,7 +112,7 @@ y = features_df["activity"]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 #scale
-scaler = MinMaxScaler() #StandardScaler
+scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
@@ -107,12 +120,11 @@ X_test_scaled = scaler.transform(X_test)
 #print(X_test_scaled.shape)
 
 #classification using SVM
-classifier = svm.SVC(kernel='poly') #rbf
+classifier = svm.SVC(kernel='rbf')
 classifier.fit(X_train_scaled, y_train)
 
 zz = classifier.predict(X_test_scaled)
 
 
-print(f"accuracy: {accuracy_score(y_test, zz)}")
+print(accuracy_score(y_test, zz))
 print(classification_report(y_test, zz))
-
