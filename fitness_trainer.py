@@ -17,7 +17,6 @@ import pyglet
 #take sensor data from dippid and predict which activity is being done
 #also predict if it is done correctly?
 
-#document how to use the app in README
 #document how our training data is structured in README
 
 #note:
