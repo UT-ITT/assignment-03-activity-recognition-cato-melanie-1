@@ -28,12 +28,31 @@ sensor = SensorUDP(PORT)
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 
+#variables for displaying the correct screen
+recognized_activity = "none"
+#2 = nothing recognized, 1 = recognized, but not correct, 0 = recognized correctly executed movement
+status = 2
+
 recognizer = ActivityRecognizer()
 print("starting up activity recognizer...\n")
 recognizer.train()
 
 win = window.Window(WINDOW_WIDTH, WINDOW_HEIGHT)
 win.set_caption("Fitness Trainer")
+
+#images
+#FIXME
+jump_1 = pyglet.resource.image("img/jumpingjack_1.png")
+
+#labels 
+label_x = 10
+label_y = WINDOW_HEIGHT - 20
+
+
+label_0 = pyglet.text.Label(text=f"Good job on your {recognized_activity}, keep going!", x=label_x, y=label_y, align='center')
+label_1 = pyglet.text.Label(text=f"It seems like you are trying to work on your fitness with {recognized_activity}, but you are not performing the exercise quite right. Take a closer look at the displayed activity and try to fix your form!", x=label_x, y=label_y, multiline=True, width=WINDOW_WIDTH-20, align="center")
+label_2 = pyglet.text.Label(text="None of the displayed activities recognized. Pick one from the 4 displayed above and start moving. The app will automatically recognize your movement and display if you are doing the exercise correctly.", x=label_x, y=label_y, multiline=True, width=WINDOW_WIDTH-20, align="center")
+
 print("fitness app ready")
 
 input = {
@@ -48,7 +67,7 @@ input_df = pd.DataFrame(input)
 
 def update(dt):
 
-    global input_df
+    global input_df, status, recognized_activity
     size = len(input_df)
 
     #read sensor data if received
@@ -65,7 +84,7 @@ def update(dt):
             input_df.loc[size] = [acc_x, acc_y, acc_z, gyro_x, gyro_y, gyro_z]
         #predict recognized movement every two seconds
         else: #size = 200
-            print(recognizer.predict(input_df)) #FIXME use prediction in fitness app
+            status, recognized_activity = recognizer.predict(input_df)
 
             #reset/empy input data frame for next recognition
             input = {
@@ -87,6 +106,35 @@ def update(dt):
 def on_key_press(symbol, modifiers):
     if symbol == pyglet.window.key.Q:
         os._exit(0)
+
+@win.event
+def on_draw():
+    global status, recognized_activity
+    global label_0, label_1, label_2
+    global jump_1
+
+    win.clear()
+    if status == 2:
+        #start screen, none of the movements recognized
+        label_2.draw()
+        print(f"status: {status}, activity: {recognized_activity}")
+    else:
+        #display recognized activity
+        ... #FIXME
+        if status == 1:
+            #movement not executed correctly
+            label_1.text = f"It seems like you are trying to work on your fitness with {recognized_activity}, but you are not performing the exercise quite right. Take a closer look at the displayed activity and try to fix your form!"
+            label_1.draw()
+            print(f"status: {status}, activity: {recognized_activity}")
+        else:
+            #movement executed correctly
+            label_0.text = f"Good job on your {recognized_activity}, keep going!"
+            label_0.draw()
+            print(f"status: {status}, activity: {recognized_activity}")
+        
+
+
+
 
 
 pyglet.clock.schedule_interval(update, 0.01)
