@@ -99,7 +99,8 @@ class ActivityRecognizer:
         predictions = self.classifier.predict(X_test_scaled)
 
 
-        print(accuracy_score(y_test, predictions))
+        print(f"accuracy: {accuracy_score(y_test, predictions)}\n")
+        print("classification report:")
         print(classification_report(y_test, predictions))
 
 

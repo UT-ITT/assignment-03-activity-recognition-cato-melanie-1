@@ -30,7 +30,7 @@ WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 
 recognizer = ActivityRecognizer()
-print("starting up activity recognizer...")
+print("starting up activity recognizer...\n")
 recognizer.train()
 
 win = window.Window(WINDOW_WIDTH, WINDOW_HEIGHT)
