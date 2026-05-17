@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from sklearn import svm
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
@@ -10,7 +11,7 @@ class ActivityRecognizer:
 
     def __init__(self):
         #classification using SVM
-        self.classifier = svm.SVC(kernel='rbf')
+        self.classifier = svm.SVC(kernel='rbf', probability=True)#FIXME to get probs
 
         #scale
         self.scaler = StandardScaler()
@@ -113,4 +114,17 @@ class ActivityRecognizer:
 
         prediction = self.classifier.predict(X_scaled)[0]
 
-        return prediction
+        #only classify when probability for one over threshold and big difference to probability of other classes
+        probs = self.classifier.predict_proba(X_scaled)
+        max_prob = probs.max(axis=1)
+        sorted_probs = np.sort(probs, axis=1)
+
+        if max_prob > 0.8:
+            if max_prob > 0.95:
+                #correctly done -> display activity and "good, keep going!"
+                return 0, prediction
+            else:
+                #recognized something, but not correctly executed
+                return 1, prediction
+        else:#too fuzzy, prediction can't be trusted, no recognizable movement
+            return 2, prediction

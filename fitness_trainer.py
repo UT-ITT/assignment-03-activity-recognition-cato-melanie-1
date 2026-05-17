@@ -67,6 +67,8 @@ def update(dt):
         #predict recognized movement every two seconds
         else: #size = 200
             print(recognizer.predict(input_df)) #FIXME use prediction in fitness app
+
+            #reset/empy input data frame for next recognition
             input = {
                 "acc_x": [],
                 "acc_y": [],
