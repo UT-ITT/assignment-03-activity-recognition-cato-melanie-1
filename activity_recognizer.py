@@ -41,7 +41,7 @@ class ActivityRecognizer:
     def create_windows(self, recording):
         windows = []
 
-        for start in range(0, len(recording) - 200 + 1, 100):
+        for start in range(0, len(recording) - 200, 100):
             window = recording.iloc[start:start + 200]
             windows.append(window)
         
