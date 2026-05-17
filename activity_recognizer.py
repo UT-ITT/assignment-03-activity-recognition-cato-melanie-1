@@ -66,7 +66,7 @@ class ActivityRecognizer:
     
 
     def train(self):
-        recordings = self.load_data("dataset")
+        recordings = self.load_data("data")
 
         all_features = []
 
