@@ -23,5 +23,11 @@ How it works:
     - cp path/to/logs/folder/*/*lift*.csv ./lifting/
     - cp path/to/logs/folder/*/*run*.csv ./running/
 
-    
+## How to use the fitness trainer
+- make a venv and install all dependencies from the requirements.txt
+- start the DIPPID app on your phone.
+    - Make sure Port 5700 and your PCs IP are set correctly
+    - Also check if both devices are in the same network and that network allows communication between the two
+- start fitness_trainer.py in your venv
+- follow the instructions in the displayed app
 
