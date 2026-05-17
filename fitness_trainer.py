@@ -151,29 +151,29 @@ def on_draw():
         start_scale = 0.15
         spacer = 50
 
-        row_1.x = 10
-        row_1.y = 10
+        row_1.x = 50
+        row_1.y = 30
         row_1.scale = start_scale - 0.05
-        row_2.x = row_1.width + spacer
-        row_2.y = 10
+        row_2.x = row_1.width + spacer + 50
+        row_2.y = 30
         row_2.scale = start_scale - 0.05
         row_1.draw()
         row_2.draw()
 
         lift_1.x = WINDOW_WIDTH/2 + spacer
-        lift_1.y = 10
+        lift_1.y = 30
         lift_1.scale = start_scale
         lift_2.x = WINDOW_WIDTH/2 + lift_1.width + 2*spacer
-        lift_2.y = 10
+        lift_2.y = 30
         lift_2.scale = start_scale
         lift_1.draw()
         lift_2.draw()
 
-        jump_1.x = 10
-        jump_1.y = row_1.height + spacer
+        jump_1.x = 70
+        jump_1.y = lift_1.height + spacer
         jump_1.scale = start_scale
-        jump_2.x = jump_1.width + spacer
-        jump_2.y = row_2.height + spacer
+        jump_2.x = jump_1.width + spacer + 90
+        jump_2.y = lift_2.height + spacer
         jump_2.scale = start_scale
         jump_1.draw()
         jump_2.draw()
@@ -212,7 +212,7 @@ def on_draw():
             run_1.draw()
             run_2.draw()
         elif recognized_activity == "rowing":
-            row_1.x = 10
+            row_1.x = 30
             row_1.y = 10
             row_1.scale = recognized_scale
             row_2.x = WINDOW_WIDTH/2 + 10
