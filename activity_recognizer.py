@@ -11,7 +11,7 @@ class ActivityRecognizer:
 
     def __init__(self):
         #classification using SVM
-        self.classifier = svm.SVC(kernel='rbf', probability=True)#FIXME to get probs
+        self.classifier = svm.SVC(kernel='rbf', probability=True)
 
         #scale
         self.scaler = StandardScaler()

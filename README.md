@@ -30,4 +30,5 @@ How it works:
     - Also check if both devices are in the same network and that network allows communication between the two
 - start fitness_trainer.py in your venv
 - follow the instructions in the displayed app
+- app can be closed with clicking the x or pressing q on the keyboard
 

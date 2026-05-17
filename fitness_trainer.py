@@ -6,14 +6,13 @@
 #evaluate accuracy using test dataset
 #try more preprocessing to get higher accuracy
 #take sensor data from dippid and predict which activity is being done
+#predict if it is done correctly
+#document how to start the fitness App in README
 
 #TODO
 #design pyglet fitness app
     #1st screen: display all activities, explain how it works
-    #activity recognition starts after pressing button? (otherwise 1st screen is gone too fast)
-#also predict if it is done correctly?
-
-#document how to start the fitness App in README
+    #if activity is recognized (0 or 1), switch to screen of that activity with correct text
 
 
 # this program visualizes activities with pyglet
