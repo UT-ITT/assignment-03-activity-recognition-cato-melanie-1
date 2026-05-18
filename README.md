@@ -17,18 +17,18 @@ How it works:
 - located in data
 - one folder for each activity ("jumpingjacks", "running", "rowing", "lifting")
 - if you have multiple folders with log data, get data in there via:
-    - cd data
-    - cp path/to/logs/folder/*/*row*.csv ./rowing/
-    - cp path/to/logs/folder/*/*jump*.csv ./jumpingjacks/
-    - cp path/to/logs/folder/*/*lift*.csv ./lifting/
-    - cp path/to/logs/folder/*/*run*.csv ./running/
+    - `cd data`
+    - `cp path/to/logs/folder/*/*row*.csv ./rowing/`
+    - `cp path/to/logs/folder/*/*jump*.csv ./jumpingjacks/`
+    - `cp path/to/logs/folder/*/*lift*.csv ./lifting/`
+    - `cp path/to/logs/folder/*/*run*.csv ./running/`
 
 ## How to use the fitness trainer
 - make a venv and install all dependencies from the requirements.txt
 - start the DIPPID app on your phone.
     - Make sure Port 5700 and your PCs IP are set correctly
     - Also check if both devices are in the same network and that network allows communication between the two
-- start fitness_trainer.py in your venv
+- start `fitness_trainer.py` in your venv
 - follow the instructions in the displayed app
 - app can be closed with clicking the x or pressing q on the keyboard
 
