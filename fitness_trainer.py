@@ -1,22 +1,3 @@
-#DONE
-#read training data from csv files
-#pre-process training data
-#split into train and test dataset
-#train ML classifier
-#evaluate accuracy using test dataset
-#try more preprocessing to get higher accuracy
-#take sensor data from dippid and predict which activity is being done
-#predict if it is done correctly
-#document how to start the fitness App in README
-#design pyglet fitness app
-    #1st screen: display all activities, explain how it works
-    #if activity is recognized (0 or 1), switch to screen of that activity with correct text
-
-
-#TODO
-#test some more
-#make design prettier (e.g. nicer font, better image placement)
-
 # this program visualizes activities with pyglet
 from activity_recognizer import *
 from DIPPID import SensorUDP
@@ -73,7 +54,7 @@ label_font_size = 20
 
 label_0 = pyglet.text.Label(text=f"Good job on your {recognized_activity}, keep going!", x=label_x, y=label_y, align='center', color=label_color, font_size = label_font_size)
 label_1 = pyglet.text.Label(text=f"It seems like you are trying to work on your fitness with {recognized_activity}, but you are not performing the exercise quite right. Take a closer look at the displayed activity and try to fix your form!", x=label_x, y=label_y, multiline=True, width=WINDOW_WIDTH-20, align="center", color=label_color, font_size = label_font_size)
-label_2 = pyglet.text.Label(text="None of the displayed activities recognized. Pick one from the 4 displayed above and start moving. The app will automatically recognize your movement and display if you are doing the exercise correctly.", x=label_x, y=label_y, multiline=True, width=WINDOW_WIDTH-20, align="center", color=label_color, font_size = label_font_size)
+label_2 = pyglet.text.Label(text="None of the displayed activities recognized. Pick one from the 4 displayed below and start moving. The app will automatically recognize your movement and display if you are doing the exercise correctly.", x=label_x, y=label_y, multiline=True, width=WINDOW_WIDTH-20, align="center", color=label_color, font_size = label_font_size)
 
 print("fitness app ready")
 
